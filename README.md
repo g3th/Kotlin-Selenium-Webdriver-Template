@@ -17,7 +17,7 @@ To get needed dependencies:
 - compile your project with ```kotlinc project.kt -include-runtime -d project.jar -classpath``` and pasted dependencies output from the script
 - launch with ``` java -classpath ``` pasted output and your main class ```projectKt```
 
-Warning: Some projects, like this automation template, have over 100 libraries to be included.
+Warning: Some projects, like this automation template, have lots of dependencies and will be quite bloated.
 
 ~~Note: The browser launches fine, but no page loads, for now. Tested on Debian/Kali linux only.~~
 
