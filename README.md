@@ -19,4 +19,5 @@ To get needed dependencies:
 
 Warning: Some projects, like this automation template, have over 100 libraries to be included.
 
-Note: The browser launches fine, but no page loads, for now. Tested on Debian/Kali linux only.
+~~Note: The browser launches fine, but no page loads, for now. Tested on Debian/Kali linux only.~~
+Update: Browser launches, and fetches the web page in the script.
