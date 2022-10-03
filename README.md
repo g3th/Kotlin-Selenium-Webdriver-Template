@@ -3,14 +3,20 @@
 
 Add all dependencies manually and compile .kt script to start selenium webdriver. This avoids using bloated IDEs (IntelliJ, Android Studio etc...) for speed. Compile time is much faster than using these terribly slow, cancerous tools, and it does not cause performance issues like when launching the tools indicated. However, efficiency might suffer.
 
-Add all the required libraries in the project (search Maven or clone this repo) and compile the project with:
+To add all required libraries launch 'lib_grab.py' into the directory where your '.gradle/caches/' is located (i.e. '.gradle/caches/modules-2/files-2.1'). This is where gradle stores all the project dependecies when launching a project with ``gradle run```.
 
-```kotlinc package_scraper.kt -include-runtime -d package_scraper.jar -classpath guava.jar:selenium.chromium.driver.jar:selenium.chrome.driver.jar:selenium.jar:selenium.remote.driver.jar:selenium.devtools.jar:selenium.http.jar:google.collections.jar:failsafe.jar:netty.jar:async.http.client.jar:slf4j.jar:netty.jar:reactive.streams.jar:commons.executor.jar:selenium.json.jar```
+Since selenium had very specific jar dependencies when run from Kali Linux, it was easier to build the project with gradle (as mentioned above), and grabbing all needed jars with the python script. However, you can still use the script to copy any project dependencies so that your project can be compiled solely with the kotlin-native compiler.
 
-Then:
+To get needed dependencies:
 
-```java -cp package_scraper.jar:guava.jar:selenium.chromium.driver.jar:selenium.chrome.driver.jar:selenium.jar:selenium.remote.driver.jar:selenium.devtools.jar:selenium.http.jar:google.collections.jar:failsafe.jar:netty.jar:async.http.client.jar:slf4j.jar:netty.jar:reactive.streams.jar:commons.executor.jar:selenium.json.jar Package_scraperKt```
+- place ```lib_grab.py``` into the directory mentioned above
+- launch the script
+- the script will create a 'dependencies' directory where all needed jars are stored
+- copy the jars into your .kt project folder
+- copy the 'classpath' output from the script. (i.e. -classpath jar1:jar2 etc...)
+- compile your project with ```kotlinc project.kt -include-runtime -d project.jar -classpath``` and pasted dependencies output from the script
+- launch with ``` java -classpath ``` pasted output and your main class ```projectKt```
 
-This project requires Kotlin native compiler, Chromium-Driver and all the libraries included.
+Warning: Some projects, like this automation template, have over 100 libraries to be included.
 
 Note: The browser launches fine, but no page loads, for now. Tested on Debian/Kali linux only.

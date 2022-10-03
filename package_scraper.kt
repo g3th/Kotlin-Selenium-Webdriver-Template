@@ -8,7 +8,7 @@ import org.openqa.selenium.chromium.ChromiumDriver
 fun main(){
 	val browserOptions = ChromeOptions()
 	browserOptions.addArguments("""general.useragent.override","Mozilla/5.0 (iPhone; CPU iPhone OS 12_1 like Mac OS X) AppleWebKit/605.1.15 ","(KHTML, like Gecko) FxiOS/18.1 Mobile/16B92 Safari/605.1.15""")
+	System.setProperty("webdriver.chrome.driver","/usr/bin/chromedriver")
 	val browser: WebDriver = ChromeDriver(browserOptions)
-	browser.get("https://stackoverflow.com/")
-	
+	browser.get("https://www.google.com")
 }

@@ -1,3 +1,0 @@
-//Imports all required libraries to launch automation
-
--cp package_scraper.jar:guava.jar:selenium.chromium.driver.jar:selenium.chrome.driver.jar:selenium.jar:selenium.remote.driver.jar:selenium.devtools.jar:selenium.http.jar:google.collections.jar:failsafe.jar:netty.jar:async.http.client.jar:slf4j.jar:netty.jar:reactive.streams.jar:commons.executor.jar:selenium.json.jar Package_scraperKt
