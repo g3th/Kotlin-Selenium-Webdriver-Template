@@ -14,8 +14,11 @@ To get needed dependencies:
 - the script will create a 'dependencies' directory where all needed jars are stored
 - copy the jars into your .kt project folder
 - copy the 'classpath' output from the script. (i.e. -classpath jar1:jar2 etc...)
-- compile your project with ```kotlinc project.kt -include-runtime -d project.jar -classpath``` and pasted dependencies output from the script
-- launch with ``` java -classpath ``` pasted output and your main class ```projectKt```
+~~ compile your project with ```kotlinc project.kt -include-runtime -d project.jar -classpath``` and pasted dependencies output from the script ~~
+~~ launch with ``` java -classpath ``` pasted output and your main class ```projectKt``` ~~
+
+Compile the project with ```compile.py```. After launch, cleanup files with ```cleanup.py```.
+
 
 Warning: Some projects, like this automation template, have lots of dependencies and will be quite bloated.
 
