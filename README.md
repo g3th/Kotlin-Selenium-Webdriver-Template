@@ -1,6 +1,8 @@
 # Kotlin Selenium Webdriver Template
 ### Manual template for beginner selenium-webdriver project in Kotlin
 
+The most important reason for compiling without Gradle is that ```readLine()``` doesn't work when testing with ```gradle run```.
+
 Add all dependencies manually and compile .kt script to start selenium webdriver. This avoids using bloated IDEs (IntelliJ, Android Studio etc...) for speed. Compile time is much faster than using these terribly slow, cancerous tools, and it does not cause performance issues like when launching the tools indicated. However, efficiency might suffer.
 
 To add all required libraries launch 'lib_grab.py' into the directory where your '.gradle/caches/' is located (i.e. '.gradle/caches/modules-2/files-2.1'). This is where gradle stores all the project dependecies when launching a project with ``gradle run```.
