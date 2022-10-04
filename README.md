@@ -5,7 +5,7 @@ The most important reason for compiling without Gradle is that ```readLine()``` 
 
 Add all dependencies manually and compile .kt script to start selenium webdriver. This avoids using bloated IDEs (IntelliJ, Android Studio etc...) for speed. Compile time is much faster than using these terribly slow, cancerous tools, and it does not cause performance issues like when launching the tools indicated. However, efficiency might suffer.
 
-To add all required libraries launch 'lib_grab.py' into the directory where your '.gradle/caches/' is located (i.e. '.gradle/caches/modules-2/files-2.1'). This is where gradle stores all the project dependecies when launching a project with ``gradle run```.
+To add all required libraries launch ```lib_grab.py``` into the directory where your ```.gradle/caches/``` is located (i.e. ```.gradle/caches/modules-2/files-2.1```). This is where gradle stores all the project dependecies when launching a project with ``gradle run```.
 
 Since selenium had very specific jar dependencies when run from Kali Linux, it was easier to build the project with gradle (as mentioned above), and grabbing all needed jars with the python script. However, you can still use the script to copy any project dependencies so that your project can be compiled solely with the kotlin-native compiler.
 
