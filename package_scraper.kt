@@ -13,24 +13,26 @@ fun main(){
 
 	System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver")
 	print("\nEnter Query: ")
-	var userQuery = readLine()
 	
+	var userQuery = readLine()	
 	var scrollIncrement:Int = 2000
 	var counter:Int = 0
-	var linksList:List<String> = emptyList()
+	var linksList:List<WebElement> = emptyList()
 	val browserOptions = ChromeOptions()
-	val browser: WebDriver = ChromeDriver(browserOptions)
-	
-	browserOptions.addArguments("""general.useragent.override","Mozilla/5.0 (iPhone; CPU iPhone OS 12_1 like Mac OS X) AppleWebKit/605.1.15 ","(KHTML, like Gecko) FxiOS/18.1 Mobile/16B92 Safari/605.1.15""")
-	
+	browserOptions.addArguments("user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.101 Safari/537.36")
+	val browser: WebDriver = ChromeDriver(browserOptions)	
 	browser.get("https://www.pexels.com/search/${userQuery}")
-	while (counter !=5){	
-			(browser as JavascriptExecutor).executeScript("window.scrollBy(0,${scrollIncrement})")
-			var rawPage = browser.findElement(By.xpath("//*[@href]"))
-			print(rawPage)
-			linksList.plus(rawPage.toString())
+	
+	while (counter !=2){
+			Thread.sleep(2000)			
 			scrollIncrement + 2000
 			++counter
 		}
+		
+	var findTags: List<WebElement> = browser.findElements(By.tagName("img")
+	for (tag in findTags){		
+		linksList = linksList.plus(findTags))
+		}
+		
 	println(linksList)
 }
