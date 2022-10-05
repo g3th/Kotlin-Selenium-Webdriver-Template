@@ -28,7 +28,7 @@ with open("dependencies_list",'w') as cp:
 cp.close()
 
 compile_it = ["kotlinc", mainclass+".kt", "-include-runtime","-d",mainclass+".jar", "-cp",classpath_string]
-subprocess.run(compile_it, shell=False, capture_output = True)
+subprocess.run(compile_it, shell=False)
 unzip_it = ["unzip", "-qq", directory+"/"+mainclass+".jar", "-d", temp_directory]
 subprocess.run(unzip_it, shell=False)
 project_mainclass = ""
