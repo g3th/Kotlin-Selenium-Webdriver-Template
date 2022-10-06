@@ -1,6 +1,8 @@
 import org.jsoup.*
 import java.io.File
 import java.nio.file.Paths
+import java.nio.file.Files
+import java.net.URL
 import kotlin.system.exitProcess
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.By
@@ -37,5 +39,11 @@ fun main(){
 			}
 		}
 	
-	println(linksList)
+	var imageCounter = 0
+	for (link in linksList){
+		var url = URL(link)
+		url.openStream().use {
+			Files.copy(it, Paths.get("Image"+imageCounter.toString()))
+			}
+		}
 }
