@@ -1,9 +1,7 @@
-import org.jsoup.*
 import java.io.File
 import java.nio.file.Paths
 import java.nio.file.Files
 import java.net.URL
-import kotlin.system.exitProcess
 import org.openqa.selenium.JavascriptExecutor
 import org.openqa.selenium.By
 import org.openqa.selenium.WebElement
