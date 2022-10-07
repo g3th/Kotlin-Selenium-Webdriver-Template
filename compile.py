@@ -42,6 +42,7 @@ classpath_string = mainclass+".jar:"+classpath_string
 
 run_it = ["java","-classpath",mainclass+".jar:"+classpath_string, project_mainclass]
 subprocess.run(run_it,shell=False)
-
 print("\nRun 'cleanup.py' to delete files and re-compile")
+
+
 

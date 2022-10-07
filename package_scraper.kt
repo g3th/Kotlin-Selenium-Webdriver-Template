@@ -34,15 +34,15 @@ fun main(){
 
 	var browser: WebDriver = ChromeDriver(browserOptions)	
 	browser.get("https://www.pexels.com/search/${imageQuery}")
-	
 	while (counter != numberOfPages!!.toIntOrNull()){
+			(browser as JavascriptExecutor).executeScript("window.scrollBy(0,${scrollIncrement.toString()})") 
 			clearScreen()
 			println("Fetching Images on Page ${counter.toString()}")	
-			findTags = findTags.plus(browser.findElements(By.xpath("//*[@href]")))
 			Thread.sleep(2000)			
 			scrollIncrement + 2000
 			++counter
 		}
+	findTags = browser.findElements(By.xpath("//*[@href]"))
 	for (tag in findTags){
 		clearScreen()
 		println("Scraper returned ${findTags.size} links \nsorting into images (Found ${linksList.size.toString()}")
@@ -51,6 +51,7 @@ fun main(){
 			}
 		}
 	browser.close()
+	print(linksList)
 	var imageCounter = 0
 	var imageLinks:List<String> = emptyList()
 	var splitImageLink:List<String> = emptyList()
@@ -60,7 +61,7 @@ fun main(){
 		}
 	for (image in imageLinks){
 		clearScreen()
-		println("Downloading Image ${imageCounter.toString()}")
+		println("Downloading Image ${imageCounter.toString()} out of ${imageLinks.size.toString()} Images")
 		var imageURL = URL(image)
 		imageURL.openStream().use{
 			Files.copy(it, Paths.get("downloads/${imageQuery}_image${imageCounter.toString()}.jpg"))
