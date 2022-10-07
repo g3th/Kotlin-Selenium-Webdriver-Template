@@ -12,11 +12,11 @@ import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 
 fun clearScreen(){
-	println("\u001b[H\u001b[2J")
+	ProcessBuilder("clear").redirectOutput(ProcessBuilder.Redirect.INHERIT).start().waitFor()
 	}
 
 fun main(){
-
+	clearScreen(
 	val directory = Paths.get("").toAbsolutePath().toString()
 	File(directory + "/downloads/").mkdir()
 	print("\nEnter Query: ")
@@ -37,7 +37,7 @@ fun main(){
 	while (counter != numberOfPages!!.toIntOrNull()){
 			(browser as JavascriptExecutor).executeScript("window.scrollBy(0,${scrollIncrement.toString()})") 
 			clearScreen()
-			println("Fetching Images on Page ${counter.toString()}")	
+			println("Fetching Page ${counter}")	
 			Thread.sleep(2000)			
 			scrollIncrement + 2000
 			++counter
@@ -45,26 +45,37 @@ fun main(){
 	findTags = browser.findElements(By.xpath("//*[@href]"))
 	for (tag in findTags){
 		clearScreen()
-		println("Scraper returned ${findTags.size} links \nsorting into images (Found ${linksList.size.toString()}")
+		var foundImageNumber = linksList.size + 1
+		var printTags:Int = findTags.size + 1
+		println("Scraper returned ${printTags} links \nsorting into images (Found ${foundImageNumber}} images)")
 		if ("&fm=jpg" in tag.getAttribute("href")){
 			linksList = linksList.plus(tag.getAttribute("href"))
 			}
 		}
 	browser.close()
-	print(linksList)
-	var imageCounter = 0
+	var imageCounter = 1
 	var imageLinks:List<String> = emptyList()
 	var splitImageLink:List<String> = emptyList()
 	for (link in linksList){
 		splitImageLink = link.split("?cs=")
 		imageLinks = imageLinks.plus(splitImageLink[0])
 		}
-	for (image in imageLinks){
+	var printImageLinks:Int = imageLinks.size + 1
+	println("There are a total of ${printImageLinks} Images")
+	println("How many would you like to download?")		
+	var listIndexes = readLine()!!.toInt()
+	var newImageLinkList:List<String> = emptyList()
+	counter = 0
+	while (counter != listIndexes){
+		newImageLinkList = newImageLinkList.plus(imageLinks[counter])
+		++counter
+		}
+	for (image in newImageLinkList){
 		clearScreen()
-		println("Downloading Image ${imageCounter.toString()} out of ${imageLinks.size.toString()} Images")
+		println("Downloading Image ${imageCounter} out of ${printImageLinks} Images")
 		var imageURL = URL(image)
 		imageURL.openStream().use{
-			Files.copy(it, Paths.get("downloads/${imageQuery}_image${imageCounter.toString()}.jpg"))
+			Files.copy(it, Paths.get("downloads/${imageQuery}_image_${imageCounter.toString()}.jpg"))
 			}
 		++ imageCounter
 		}
