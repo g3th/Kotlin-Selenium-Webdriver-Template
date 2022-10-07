@@ -1,5 +1,7 @@
-# Kotlin Selenium Webdriver Template
+# Kotlin Selenium Webdriver Template (Now a ["Pexels Yoink"](https://github.com/g3th/Pexels-Yoink) port)
 ### Manual template for beginner selenium-webdriver project in Kotlin
+
+This project gradually became a port for the ["Pexels Yoink"](https://github.com/g3th/Pexels-Yoink) scraping script, to learn it would be coded in Kotlin. It can still be used as a template, but unecessary imports can be removed.
 
 The most important reason for compiling without Gradle is that ```readLine()``` doesn't work when testing with ```gradle run```.
 
