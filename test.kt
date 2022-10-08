@@ -27,5 +27,12 @@ fun removeListElementsTest(){
 
 fun main(){
 	ProcessBuilder("clear").redirectOutput(ProcessBuilder.Redirect.INHERIT).start().waitFor()
-
+	var dir = Paths.get("").toAbsolutePath()
+	Files.walk(dir).filter {
+		Files.isRegularFile(it)
+		}.forEach {
+			if (it.toString().contains(".") != true){
+				println(it)
+				}
+			}	
 }
