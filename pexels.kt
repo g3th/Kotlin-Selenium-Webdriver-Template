@@ -13,6 +13,14 @@ fun clearScreen(){
 	ProcessBuilder("clear").redirectOutput(ProcessBuilder.Redirect.INHERIT).start().waitFor()
 }
 
+fun getFileSize(name:String?, number:Int): Long{
+	var currentFile:String = ""
+	var currentDirectory = Paths.get("").toAbsolutePath().toString()
+	var imagePath = File(currentDirectory + "/downloads/${name}_image_${number}.jpg").toPath()
+	var sizeOfCurrentFile:Long = Files.size(imagePath)
+	return sizeOfCurrentFile
+}
+
 fun main(){
 	clearScreen()
 	val directory = Paths.get("").toAbsolutePath().toString()
@@ -65,6 +73,7 @@ fun main(){
 	var listIndexes = readLine()!!.toInt()
 	var newImageLinkList:List<String> = emptyList()
 	counter = 0
+	var size:Long = 0
 	while (counter != listIndexes){
 		newImageLinkList = newImageLinkList.plus(imageLinks[counter])
 		++counter
@@ -72,10 +81,16 @@ fun main(){
 	for (image in newImageLinkList){
 		clearScreen()
 		println("Downloading Image ${imageCounter} out of ${newImageLinkList.size} Images")
+		println("(Total Bytes Downloaded: ${size})")
 		var imageURL = URL(image)
 		imageURL.openStream().use{
 			Files.copy(it, Paths.get("downloads/${imageQuery}_image_${imageCounter.toString()}.jpg"))
 			}
+		size = getFileSize(imageQuery, imageCounter)
+		if (imageCounter > 1){
+			size = size + size
+			}
+		
 		++ imageCounter
 		}
 }

@@ -25,14 +25,19 @@ fun removeListElementsTest(){
 		}
 }
 
+fun getFileSize(){
+	var fileList:List<String> = emptyList()
+		var currentDirectory = Paths.get("").toAbsolutePath().toString()
+		var imagePath = File(currentDirectory + "/downloads").toPath()
+		Files.walk(imagePath).filter {
+			Files.isRegularFile(it)
+			}.forEach {	
+				fileList = fileList.plus(it.toString())
+				}
+		println(Files.size(File(fileList[0]).toPath()))
+}
+
 fun main(){
 	ProcessBuilder("clear").redirectOutput(ProcessBuilder.Redirect.INHERIT).start().waitFor()
-	var dir = Paths.get("").toAbsolutePath()
-	Files.walk(dir).filter {
-		Files.isRegularFile(it)
-		}.forEach {
-			if (it.toString().contains(".") != true){
-				println(it)
-				}
-			}	
+
 }
