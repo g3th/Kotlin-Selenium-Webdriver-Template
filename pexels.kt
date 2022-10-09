@@ -43,7 +43,8 @@ fun main(){
 	while (counter != numberOfPages!!.toIntOrNull()){
 			(browser as JavascriptExecutor).executeScript("window.scrollBy(0,${scrollIncrement.toString()})") 
 			clearScreen()
-			println("Fetching Page ${counter}")	
+			var printPageNumber = (counter + 1).toString()
+			println("Fetching Page ${printPageNumber}")	
 			Thread.sleep(2000)			
 			scrollIncrement + 2000
 			++counter
@@ -53,7 +54,7 @@ fun main(){
 		clearScreen()
 		var foundImageNumber = linksList.size + 1
 		var printTags:Int = findTags.size + 1
-		println("Scraper returned ${printTags} links \nsorting into images (Found ${foundImageNumber}} images)")
+		println("Scraper returned ${printTags} links \nsorting into images (Found ${foundImageNumber} images)")
 		if ("&fm=jpg" in tag.getAttribute("href")){
 			linksList = linksList.plus(tag.getAttribute("href"))
 			}
@@ -74,6 +75,7 @@ fun main(){
 	var newImageLinkList:List<String> = emptyList()
 	counter = 0
 	var size:Long = 0
+	var fileSizeList:List<Long> = emptyList()
 	while (counter != listIndexes){
 		newImageLinkList = newImageLinkList.plus(imageLinks[counter])
 		++counter
@@ -81,16 +83,13 @@ fun main(){
 	for (image in newImageLinkList){
 		clearScreen()
 		println("Downloading Image ${imageCounter} out of ${newImageLinkList.size} Images")
-		println("(Total Bytes Downloaded: ${size})")
+		println(String.format("(Total Bytes Downloaded: %,d)".format(size)))
 		var imageURL = URL(image)
 		imageURL.openStream().use{
 			Files.copy(it, Paths.get("downloads/${imageQuery}_image_${imageCounter.toString()}.jpg"))
 			}
-		size = getFileSize(imageQuery, imageCounter)
-		if (imageCounter > 1){
-			size = size + size
-			}
-		
+		fileSizeList = fileSizeList.plus(getFileSize(imageQuery, imageCounter))
+		size = fileSizeList.sum()
 		++ imageCounter
 		}
 }

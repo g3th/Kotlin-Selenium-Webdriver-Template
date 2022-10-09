@@ -25,7 +25,7 @@ fun removeListElementsTest(){
 		}
 }
 
-fun getFileSize(){
+fun getFileNames():List<String>{
 	var fileList:List<String> = emptyList()
 		var currentDirectory = Paths.get("").toAbsolutePath().toString()
 		var imagePath = File(currentDirectory + "/downloads").toPath()
@@ -34,10 +34,22 @@ fun getFileSize(){
 			}.forEach {	
 				fileList = fileList.plus(it.toString())
 				}
-		println(Files.size(File(fileList[0]).toPath()))
+		return fileList
+}
+
+fun getTotalFileSize(files:List<String>): Long?{
+	var fileSizesInBytes:List<Long> = emptyList()
+	var counter:Int = 1
+	for (imageFile in files){
+		fileSizesInBytes = fileSizesInBytes.plus(Files.size(File(imageFile).toPath()))
+		}
+	return fileSizesInBytes.sum()
 }
 
 fun main(){
 	ProcessBuilder("clear").redirectOutput(ProcessBuilder.Redirect.INHERIT).start().waitFor()
-
+	var longValue:Long = 94737655
+	println(String.format("%,d",longValue))
+	
+	
 }
