@@ -14,7 +14,6 @@ fun clearScreen(){
 }
 
 fun getFileSize(name:String?, number:Int): Long{
-	var currentFile:String = ""
 	var currentDirectory = Paths.get("").toAbsolutePath().toString()
 	var imagePath = File(currentDirectory + "/downloads/${name}_image_${number}.jpg").toPath()
 	var sizeOfCurrentFile:Long = Files.size(imagePath)
@@ -26,7 +25,6 @@ fun main(){
 	val directory = Paths.get("").toAbsolutePath().toString()
 	File(directory + "/downloads/").mkdir()
 	print("\nEnter Query: ")
-	var findTags: List<WebElement> = emptyList()
 	var imageQuery = readLine()
 	print("\nEnter number of Pages to scrape: ")
 	var numberOfPages = readLine()!!.toIntOrNull()
@@ -49,7 +47,7 @@ fun main(){
 			scrollIncrement + 2000
 			++counter
 		}
-	findTags = browser.findElements(By.xpath("//*[@href]"))
+	var findTags: List<WebElement> = browser.findElements(By.xpath("//*[@href]"))
 	for (tag in findTags){
 		clearScreen()
 		var foundImageNumber = linksList.size + 1
@@ -62,7 +60,7 @@ fun main(){
 	browser.close()
 	var imageCounter = 1
 	var imageLinks:List<String> = emptyList()
-	var splitImageLink:List<String> = emptyList()
+	var splitImageLink:List<String>
 	for (link in linksList){
 		splitImageLink = link.split("?cs=")
 		imageLinks = imageLinks.plus(splitImageLink[0])

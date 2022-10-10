@@ -27,7 +27,7 @@ fun removeListElementsTest(){
 
 fun getFileNames():List<String>{
 	var fileList:List<String> = emptyList()
-		var currentDirectory = Paths.get("").toAbsolutePathString()
+		var currentDirectory = Paths.get("").toAbsolutePath().toString()
 		var imagePath = File(currentDirectory + "/downloads").toPath()
 		Files.walk(imagePath).filter {
 			Files.isRegularFile(it)
@@ -39,7 +39,6 @@ fun getFileNames():List<String>{
 
 fun getTotalFileSize(files:List<String>): Long?{
 	var fileSizesInBytes:List<Long> = emptyList()
-	var counter:Int = 1
 	for (imageFile in files){
 		fileSizesInBytes = fileSizesInBytes.plus(Files.size(File(imageFile).toPath()))
 		}
@@ -58,6 +57,6 @@ fun main(){
 			}.forEach {	
 				fileList = fileList.plus(it.toString())
 				}
-	println(fileList[0])
+	println(fileList)
 	
 }
