@@ -1,6 +1,6 @@
 import java.io.File
 import java.nio.file.Paths
-
+import java.nio.file.Files
 
 fun main(){
 	print("Enter project name (no extension, i.e. 'project' not 'project.kt'): ")
@@ -32,15 +32,14 @@ fun main(){
 
 	val unzipIt = listOf("unzip", "-qq", currentDirectory+"/"+projectName+".jar", "-d", tempDirectory)
 	ProcessBuilder(unzipIt).redirectError(ProcessBuilder.Redirect.INHERIT).start().waitFor()
-
-	var projectMainclass:String? = null
-	File(tempDirectory).walk().forEach {
-		if ("class" in it.toString()){
-			projectMainclass = it.toString().replace(".class","")
+	var fileList:List<String> = emptyList()
+	File(tempDirectory).walk().forEach{
+		if (".class" in it.toString()){
+			fileList = fileList.plus(it.toString())
 		}
 	}
 	File(tempDirectory).deleteRecursively()
-	
-	var runIt = listOf("java","-classpath",projectName+".jar:"+classPath, projectMainclass)
-	ProcessBuilder(runIt).redirectError(ProcessBuilder.Redirect.INHERIT).start().waitFor()
+	var projectMainclass:String = fileList[0].split("/")[7].replace(".class","")
+	val runIt = listOf("java","-classpath",projectName+".jar:"+classPath, projectMainclass)
+	ProcessBuilder(runIt).redirectOutput(ProcessBuilder.Redirect.INHERIT).redirectError(ProcessBuilder.Redirect.INHERIT).start()
 }

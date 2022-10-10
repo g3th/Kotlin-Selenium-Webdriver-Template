@@ -29,7 +29,7 @@ fun main(){
 	var findTags: List<WebElement> = emptyList()
 	var imageQuery = readLine()
 	print("\nEnter number of Pages to scrape: ")
-	var numberOfPages = readLine() 
+	var numberOfPages = readLine()!!.toIntOrNull()
 	var scrollIncrement:Int = 2000
 	var counter:Int = 0
 	var linksList:List<String> = emptyList()
@@ -39,8 +39,8 @@ fun main(){
 	browserOptions.addArguments("user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.101 Safari/537.36")
 
 	var browser: WebDriver = ChromeDriver(browserOptions)	
-	browser.get("https://www.pexels.com/search/${imageQuery}")
-	while (counter != numberOfPages!!.toIntOrNull()){
+	browser.get("https://www.pexels.com/search/?s=${imageQuery}")
+	while (counter != numberOfPages){
 			(browser as JavascriptExecutor).executeScript("window.scrollBy(0,${scrollIncrement.toString()})") 
 			clearScreen()
 			var printPageNumber = (counter + 1).toString()

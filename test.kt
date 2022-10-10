@@ -9,7 +9,7 @@ fun downloadTest(){
 	var page = URL("https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg")
 	System.setProperty("http.agent","Chrome")
 	page.openStream().use{
-		Files.copy(it,Paths.get("downloads/image.jpg"))	
+		Files.copy(it,Paths.get("downloads/image.jpg"))
 	}
 }
 
@@ -27,7 +27,7 @@ fun removeListElementsTest(){
 
 fun getFileNames():List<String>{
 	var fileList:List<String> = emptyList()
-		var currentDirectory = Paths.get("").toAbsolutePath().toString()
+		var currentDirectory = Paths.get("").toAbsolutePathString()
 		var imagePath = File(currentDirectory + "/downloads").toPath()
 		Files.walk(imagePath).filter {
 			Files.isRegularFile(it)
@@ -50,6 +50,14 @@ fun main(){
 	ProcessBuilder("clear").redirectOutput(ProcessBuilder.Redirect.INHERIT).start().waitFor()
 	var longValue:Long = 94737655
 	println(String.format("%,d",longValue))
-	
+	var currentDirectory = Paths.get("").toAbsolutePath().toString()
+	var tempDirectory = currentDirectory + "/temp"
+	var fileList:List<String> = emptyList()
+	Files.walk(File(tempDirectory).toPath()).filter {
+			Files.isRegularFile(it)
+			}.forEach {	
+				fileList = fileList.plus(it.toString())
+				}
+	println(fileList[0])
 	
 }
