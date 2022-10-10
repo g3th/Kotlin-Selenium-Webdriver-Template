@@ -37,7 +37,7 @@ fun main(){
 	browserOptions.addArguments("user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.101 Safari/537.36")
 
 	var browser: WebDriver = ChromeDriver(browserOptions)	
-	browser.get("https://www.pexels.com/search/?s=${imageQuery}")
+	browser.get("https://www.pexels.com/search/${imageQuery}")
 	while (counter != numberOfPages){
 			(browser as JavascriptExecutor).executeScript("window.scrollBy(0,${scrollIncrement.toString()})") 
 			clearScreen()
@@ -74,7 +74,7 @@ fun main(){
 	counter = 0
 	var size:Long = 0
 	var fileSizeList:List<Long> = emptyList()
-	while (counter != listIndexes){
+	while (counter != listIndexes-1){
 		newImageLinkList = newImageLinkList.plus(imageLinks[counter])
 		++counter
 		}
