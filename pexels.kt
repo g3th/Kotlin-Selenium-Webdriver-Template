@@ -50,14 +50,16 @@ fun main(){
 	var findTags: List<WebElement> = browser.findElements(By.xpath("//*[@href]"))
 	for (tag in findTags){
 		clearScreen()
-		var foundImageNumber = linksList.size + 1
-		var printTags:Int = findTags.size + 1
+		var foundImageNumber = linksList.size
+		var printTags:Int = findTags.size
 		println("Scraper returned ${printTags} links \nsorting into images (Found ${foundImageNumber} images)")
 		if ("&fm=jpg" in tag.getAttribute("href")){
 			linksList = linksList.plus(tag.getAttribute("href"))
 			}
 		}
+
 	browser.close()
+
 	var imageCounter = 1
 	var imageLinks:List<String> = emptyList()
 	var splitImageLink:List<String>
@@ -65,18 +67,17 @@ fun main(){
 		splitImageLink = link.split("?cs=")
 		imageLinks = imageLinks.plus(splitImageLink[0])
 		}
-	var printImageLinks:Int = imageLinks.size + 1
 	clearScreen()
-	println("There are a total of ${printImageLinks} Images")
+	println("There are a total of ${imageLinks.size} Images")
 	println("How many would you like to download?")
 	var listIndexes = readLine()!!.toInt()
 	var newImageLinkList:List<String> = emptyList()
 	counter = 0
 	var size:Long = 0
 	var fileSizeList:List<Long> = emptyList()
-	
+	print(imageLinks.size)
 	while (counter != listIndexes){
-		newImageLinkList = newImageLinkList.plus(imageLinks[counter-1])
+		newImageLinkList = newImageLinkList.plus(imageLinks[counter])
 		++counter
 		}
 	for (image in newImageLinkList){

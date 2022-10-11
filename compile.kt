@@ -32,15 +32,21 @@ fun main(){
 
 	val unzipIt = listOf("unzip", "-qq", currentDirectory+"/"+projectName+".jar", "-d", tempDirectory)
 	ProcessBuilder(unzipIt).redirectError(ProcessBuilder.Redirect.INHERIT).start().waitFor()
-	var fileList:List<String> = emptyList()
-	File(tempDirectory).walk().forEach{
+
+	var classDirectoryPath = File(tempDirectory)
+	var classDirectoryFiles = classDirectoryPath.list()
+	var tempDirFilelist:List<String> = emptyList()
+	for (file in classDirectoryFiles){
+		tempDirFilelist = tempDirFilelist.plus(file)
+	}
+	var projectMainclass:String? = null
+	tempDirFilelist.forEach{
 		if (".class" in it.toString()){
-			fileList = fileList.plus(it.toString())
+			 projectMainclass = it.toString().replace(".class","")
 		}
 	}
-	File(tempDirectory).deleteRecursively()
-	var projectMainclass:String = fileList[0].split("/")[7].replace(".class","")
-	println(fileList[0])
+	File(tempDirectory).deleteRecursively()	
+	println(projectMainclass)
 	val runIt = listOf("java","-classpath",projectName+".jar:"+classPath, projectMainclass)
 	ProcessBuilder(runIt).redirectInput(ProcessBuilder.Redirect.INHERIT).redirectOutput(ProcessBuilder.Redirect.INHERIT).redirectError(ProcessBuilder.Redirect.INHERIT).start().waitFor()
 }
