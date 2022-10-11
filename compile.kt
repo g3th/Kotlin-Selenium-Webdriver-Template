@@ -38,9 +38,9 @@ fun main(){
 			fileList = fileList.plus(it.toString())
 		}
 	}
-	//File(tempDirectory).deleteRecursively()
+	File(tempDirectory).deleteRecursively()
 	var projectMainclass:String = fileList[0].split("/")[7].replace(".class","")
 	println(fileList[0])
 	val runIt = listOf("java","-classpath",projectName+".jar:"+classPath, projectMainclass)
-	ProcessBuilder(runIt).redirectOutput(ProcessBuilder.Redirect.INHERIT).redirectError(ProcessBuilder.Redirect.INHERIT).start()
+	ProcessBuilder(runIt).redirectInput(ProcessBuilder.Redirect.INHERIT).redirectOutput(ProcessBuilder.Redirect.INHERIT).redirectError(ProcessBuilder.Redirect.INHERIT).start().waitFor()
 }

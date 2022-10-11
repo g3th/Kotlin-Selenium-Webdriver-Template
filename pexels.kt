@@ -74,8 +74,9 @@ fun main(){
 	counter = 0
 	var size:Long = 0
 	var fileSizeList:List<Long> = emptyList()
-	while (counter != listIndexes-1){
-		newImageLinkList = newImageLinkList.plus(imageLinks[counter])
+	
+	while (counter != listIndexes){
+		newImageLinkList = newImageLinkList.plus(imageLinks[counter-1])
 		++counter
 		}
 	for (image in newImageLinkList){
