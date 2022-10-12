@@ -13,12 +13,15 @@ Since selenium had very specific jar dependencies when run from Kali Linux, it w
 
 To get needed dependencies:
 
-- place ```lib_grab.py``` into the directory mentioned above
-- launch the script
+- place ```lib.kt``` into the directory mentioned above
+- compile and launch:
+	``` kotlinc lib.kt -include-runtime -d lib.jar / java -jar lib.jar ```
 - the script will create a 'dependencies' directory where all needed jars are stored
 - copy the jars into your .kt project ```libs``` folder
 
-Compile the project with ```compile.py```. After launch, cleanup files with ```cleanup.py``` to recompile.
+Compile the project with ```compile.kt```. After launch, cleanup files with ```cleanup.kt``` to recompile.
+
+There are also Python scripts which are easier to launch.
 
 Warning: Some projects, like this automation template, have lots of dependencies and will be quite bloated.
 
